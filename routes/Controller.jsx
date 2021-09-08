@@ -7,7 +7,9 @@ import HomeScreen from '../screens/HomeScreen'
 import RegisterScreen from '../screens/RegisterScreen'
 import InventoryScreen from '../screens/InventoryScreen'
 import { useAuth } from '../context/AuthContext'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
+import { AntDesign } from '@expo/vector-icons'
+import colors from '../assets/colors'
 
 const Tab = createBottomTabNavigator()
 
@@ -20,7 +22,7 @@ const Controller = () => {
             {fetchingUser ? (
                 <LoadingScreen />
             ) : currentUser ? (
-                <NavigationContainer style={{ backgroundColor: 'red' }}>
+                <NavigationContainer>
                     <Screens />
                 </NavigationContainer>
             ) : (
@@ -32,22 +34,33 @@ const Controller = () => {
 
 const Screens = () => {
     return (
-        <Tab.Navigator>
+        <Tab.Navigator
+            screenOptions={{
+                tabBarStyle: {
+                    backgroundColor: colors.green_light,
+                    paddingVertical: 10,
+                    color: '#f00',
+                },
+            }}
+        >
             <Tab.Screen
                 name='Home'
                 component={HomeScreen}
-                // initialParams={{ iconName: 'play-circle' }}
+                options={{
+                    tabBarIcon: ({ color, size }) => (
+                        <AntDesign name='home' size={size} color={color} />
+                    ),
+                }}
             />
             <Tab.Screen
                 name='Inventory'
                 component={InventoryScreen}
-                // initialParams={{ iconName: 'play-circle' }}
+                options={{
+                    tabBarIcon: ({ color, size }) => (
+                        <AntDesign name='appstore-o' size={size} color={color} />
+                    ),
+                }}
             />
-            {/* <Tab.Screen
-            name='Register'
-            component={RegisterScreen}
-            // initialParams={{ iconName: 'play-circle' }}
-        /> */}
         </Tab.Navigator>
     )
 }

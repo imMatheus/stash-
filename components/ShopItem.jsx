@@ -1,14 +1,16 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Image } from 'react-native'
 import colors from '../assets/colors'
 
-const ShopItem = ({ title = 'Jordans Air Max 12s ' }) => {
+const ShopItem = ({ title, imageUrl, quantity, price }) => {
     return (
         <View style={styles.container}>
-            <View style={styles.image}></View>
+            <View style={styles.imageContainer}>
+                <Image style={styles.image} source={{ uri: imageUrl }} />
+            </View>
             <Text style={styles.title}>{title}</Text>
-            <Text style={styles.price}>899kr</Text>
-            <Text style={[styles.price, styles.quantity]}>34'st</Text>
+            <Text style={styles.price}>{price}kr</Text>
+            <Text style={[styles.price, styles.quantity]}>{quantity}'st</Text>
         </View>
     )
 }
@@ -17,18 +19,20 @@ export default ShopItem
 
 const styles = StyleSheet.create({
     container: {
-        // backgroundColor: colors.green_dark,
-        // flex: 1,
-        width: '47%',
+        width: '47.75%',
         minHeight: 280,
-        marginLeft: '2%',
+        marginLeft: '1.5%',
         marginVertical: 6,
     },
-    image: {
+    imageContainer: {
         height: 170,
         width: '100%',
         backgroundColor: 'gray',
         marginBottom: 9,
+    },
+    image: {
+        width: '100%',
+        height: '100%',
     },
     title: {
         marginBottom: 4,
@@ -37,7 +41,7 @@ const styles = StyleSheet.create({
     },
     price: {
         fontSize: 14,
-        opacity: 0.67,
+        opacity: 0.73,
     },
     quantity: {
         color: colors.green_light,
